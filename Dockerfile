@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     curl -L https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -o android_tools.zip && \
     unzip android_tools.zip && \
     rm android_tools.zip && \
-    apt-get remove -y unzip  
+    apt-get remove -y unzip
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
@@ -25,7 +25,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4 \
 	libicu60 \
         libunwind8 \
-        netcat
+        netcat \
+	android-tools-adb \
+	redis-tools
+
 
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 # Accept Android SDK licenses
