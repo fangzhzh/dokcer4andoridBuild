@@ -7,6 +7,15 @@ ENV ANDROID_HOME /opt/android-sdk-linux
 # Install the unzip tool then download Android SDK into $ANDROID_HOME and unzip it.
 # You can find the URL to the current Android SDK version at: https://developer.android.com/studio/index.html
 
+# RUN sudo dpkg --purge --force-depends ca-certificates-java
+RUN apt-get -y upgrade && apt-get -y update &&  \
+        apt-get install -y openjdk-8-jdk ; exit 0
+# RUN  apt-get install -y ca-certificates-java  &&
+# RUN   dpkg --purge --force-depends ca-certificates-java && \
+#       apt-get install -y ca-certificates-java  && \
+#       apt-get install -y maven
+RUN     apt-get install -y maven
+
 RUN apt-get update && apt-get install -y \
     unzip && \
     mkdir -p ${ANDROID_HOME} && \
@@ -16,18 +25,17 @@ RUN apt-get update && apt-get install -y \
     rm android_tools.zip && \
     apt-get remove -y unzip
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        ca-certificates \
+RUN apt-get install -y --no-install-recommends \
         curl \
         jq \
         git \
         iputils-ping \
         libcurl4 \
-	libicu60 \
+        libicu60 \
         libunwind8 \
         netcat \
-	android-tools-adb \
-	redis-tools
+        android-tools-adb \
+        redis-tools
 
 
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
