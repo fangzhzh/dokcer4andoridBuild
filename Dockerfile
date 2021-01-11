@@ -41,6 +41,7 @@ RUN apt-get install -y --no-install-recommends \
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 # Accept Android SDK licenses
 RUN yes | sdkmanager --licenses
+RUN yes | sdkmanager "platforms;android-28"
 RUN yes | sdkmanager "build-tools;28.0.3"
 RUN sdkmanager --install "ndk;20.0.5594570"
 RUN sdkmanager --install "ndk;21.0.6113669"
